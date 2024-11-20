@@ -1,0 +1,72 @@
+body {
+    /* cursor: none; */
+    width: 600px;
+    height: 1024px;
+    border: thin solid black;
+    margin: 0;
+    padding: 0;
+    background: black;
+    border-radius: 20px;
+}
+
+html {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+#videoElement {
+    /* width: 500px;
+    transform: scaleX(-1) rotate(90deg);
+    transform-origin: center;
+    object-fit: cover; */
+    display: none;
+}
+
+canvas#previewCanvas {
+    height: 500px;
+    width: 375px;
+    border-radius: 20px;
+    border: thin solid black;
+}
+
+.photoPreview {
+    /* margin: 0px auto;
+    width: 375px;
+    height: 500px; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+button#captureButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: none;
+    background: white;
+    padding: 0;
+    border: 4px solid black;
+    outline: 4px solid white;
+}
+
+button#captureButton:hover {
+    background: rgba(255, 255, 255, 0.8);
+    /* outline: 4px solid rgba(255, 255, 255, 0.8); */
+    cursor: pointer;
+}
+
+/* div.buttonContainer {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 4px black solid;
+    outline: 10px solid white;
+} */
+
+div.buttonContainer {
+    margin-top: 20px;
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FridgeIQ Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+</head>
+<body>
+    <div class="photoPreview">
+        <video autoplay="true" id="videoElement"></video>
+        <canvas id="previewCanvas"></canvas>
+        <div class="buttonContainer">
+            <button id="captureButton"></button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/photo_preview.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/take_photo.js')}}"></script>
+</body>
+</html>
