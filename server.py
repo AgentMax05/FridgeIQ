@@ -6,8 +6,6 @@ import detect
 import adafruit_dht
 import board
 
-picam2 = Picamera2()
-
 dht_device = adafruit_dht.DHT11(board.D4)
 
 app = Flask(__name__)
@@ -18,6 +16,10 @@ def hello_world():
 
 @app.route("/capture", methods=["GET"])
 def capture_image():
+    picam2 = Picamera2()
+    camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, lores={"size": (640, 480)}, display="lores")
+    picam2.configure(camera_config)
+
     try:
         picam2.start()
         picam2.capture_file("temp_image.jpg")
