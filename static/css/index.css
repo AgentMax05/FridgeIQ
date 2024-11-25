@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 15px;
     background: #1a1a1a;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     color: white;
     font-family: system-ui, -apple-system, sans-serif;
     box-sizing: border-box;
@@ -89,13 +89,14 @@ canvas#previewCanvas {
     width: 350px;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.05);
+    transform: scaleX(-1);
 }
 
 .photoPreview {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 button#captureButton {
