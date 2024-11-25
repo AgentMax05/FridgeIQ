@@ -20,10 +20,10 @@ def capture_image():
 
         food_objects = detect.detect_foods("./temp_image.jpg")
 
-        return jsonify({"error": False, "message": food_objects}), 200
+        return jsonify({"ok": True, "message": food_objects}), 200
 
     except Exception as e:
-        return jsonify({"error": True, "message": str(e)}), 500
+        return jsonify({"ok": False, "message": str(e)}), 500
 
 # if __name__ == "__main__":
 #     app.run(debug=True)

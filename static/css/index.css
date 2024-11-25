@@ -118,6 +118,7 @@ button#captureButton:hover {
 }
 
 .detected-item {
+    position: relative;
     padding: 8px 12px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
@@ -125,7 +126,17 @@ button#captureButton:hover {
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
+
+    display: flex;
+    justify-content: space-between;
+
     opacity: 1;  /* Add this */
+}
+
+.detected-item p {
+    /* display: inline; */
+    margin: 0;
+    padding: 0;
 }
 
 .detected-item:hover {
