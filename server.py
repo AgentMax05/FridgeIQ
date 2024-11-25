@@ -1,8 +1,8 @@
 #server.py
 from flask import Flask, jsonify, render_template 
-from picamera2 import Picamera2
 import detect 
 
+from picamera2 import Picamera2
 import adafruit_dht
 import board
 
@@ -19,6 +19,7 @@ def capture_image():
     picam2 = Picamera2()
     camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, lores={"size": (640, 480)}, display="lores")
     picam2.configure(camera_config)
+    picam2.set_controls({"AfMode": 2, "AfTrigger": 0})
 
     try:
         picam2.start()
