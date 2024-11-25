@@ -60,8 +60,8 @@ def run_quickstart():
     print("Objects detected:")
     for obj in objects:
         print(f"{obj.name} - Confidence: {obj.score:.2f}")
-        if categorize.is_food_item(obj.name):
-            filtered_objects.append(obj)
+        # if categorize.is_food_item(obj.name):
+        filtered_objects.append(obj)
 
 
     # Draw boxes and labels on the image
