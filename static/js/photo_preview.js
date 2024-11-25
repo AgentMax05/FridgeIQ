@@ -4,7 +4,7 @@ let canvas = document.querySelector("canvas#previewCanvas")
 let context = canvas.getContext("2d");
 
 if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({video: true})
+    navigator.mediaDevices.getUserMedia({video: {width: 1920, height: 1080}, audio: false})
     .then((stream) => {
         video.srcObject = stream;
 
