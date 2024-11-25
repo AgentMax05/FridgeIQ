@@ -1,10 +1,16 @@
 from nltk.corpus import wordnet 
 
 def is_food_item(word):
-    # Get all synsets of the word
-    synsets = wordnet.synsets(word)
-    for synset in synsets:
-        # Check if 'food', 'edible', or similar terms appear in the definition or lemma names
-        if 'food' in synset.lexname() or 'food' in synset.definition() or 'edible' in synset.definition():
-            return True
+    for sub_word in word.split(" "):
+        synsets = wordnet.synsets(sub_word)
+        for synset in synsets:
+            for word in ["food", "edible", "grocery"]:
+                if word in synset.definition() or word in synset.lexname():
+                    return True
     return False
+
+# test if running as main
+if __name__ == "__main__":
+    while True:
+        print(is_food_item(input("Test Prompt: ")))
+    
