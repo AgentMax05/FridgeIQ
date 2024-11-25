@@ -1,3 +1,4 @@
+//take_photo.js
 let captureButton = document.querySelector("button#captureButton");
 
 captureButton.addEventListener("click", () => {

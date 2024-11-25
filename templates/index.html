@@ -1,3 +1,4 @@
+<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +8,37 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
 </head>
 <body>
-    <div class="photoPreview">
-        <video autoplay="true" id="videoElement"></video>
-        <canvas id="previewCanvas"></canvas>
-        <div class="buttonContainer">
-            <button id="captureButton"></button>
+    <div class="container">
+        <div class="left-panel">
+            <div class="photoPreview">
+                <video autoplay="true" id="videoElement"></video>
+                <canvas id="previewCanvas"></canvas>
+                <button id="captureButton"></button>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="sensor-data">
+                <div class="sensor-card">
+                    <h3>TEMPERATURE</h3>
+                    <div class="sensor-value">4°C</div>
+                </div>
+                <div class="sensor-card">
+                    <h3>HUMIDITY</h3>
+                    <div class="sensor-value">45%</div>
+                </div>
+            </div>
+            
+            <div class="items-list">
+                <h2>Detected Items</h2>
+                <div class="detected-item">Apple</div>
+                <div class="detected-item">Milk Carton</div>
+            </div>
         </div>
     </div>
+
     <script src="{{ url_for('static', filename='js/photo_preview.js')}}"></script>
     <script src="{{ url_for('static', filename='js/take_photo.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/items_handler.js')}}"></script>
 </body>
 </html>

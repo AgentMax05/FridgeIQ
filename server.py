@@ -1,3 +1,4 @@
+#server.py
 from flask import Flask, jsonify, render_template 
 from picamera2 import Picamera2
 import detect 
