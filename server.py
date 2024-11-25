@@ -3,7 +3,12 @@ from flask import Flask, jsonify, render_template
 from picamera2 import Picamera2
 import detect 
 
+import adafruit_dht
+import board
+
 picam2 = Picamera2()
+
+dht_device = adafruit_dht.DHT11(board.D4)
 
 app = Flask(__name__)
 
@@ -22,6 +27,17 @@ def capture_image():
 
         return jsonify({"ok": True, "message": food_objects}), 200
 
+    except Exception as e:
+        return jsonify({"ok": False, "message": str(e)}), 500
+
+@app.route("/dht11", methods=["GET"])
+def get_dht11():
+    try:
+        temperature_c = dht_device.temperature
+        temperature_f = temperature_c * (9 / 5) + 32
+        humidity = dht_device.humidity
+
+        return jsonify({"ok": True, "message": {"temperature": temperature_f, "humidity": humidity}}), 200
     except Exception as e:
         return jsonify({"ok": False, "message": str(e)}), 500
 

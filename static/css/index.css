@@ -23,6 +23,7 @@ html {
     grid-template-columns: 350px 1fr;
     gap: 15px;
     height: 100%;
+    position: relative;
 }
 
 .left-panel {
@@ -141,4 +142,19 @@ button#captureButton:hover {
 
 .detected-item:hover {
     background: rgba(255, 255, 255, 0.1);
+}
+
+#error-popup {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    z-index: 1000;
+    display: none;
 }

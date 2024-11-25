@@ -5,6 +5,17 @@ captureButton.addEventListener("click", () => {
     takePicture();
 }, false);
 
+function addErrorMessage(errorMessage, delay=3000) {
+    const popup = document.getElementById('error-popup');
+
+    popup.textContent = errorMessage;
+    popup.style.display = 'block';
+
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, delay);
+}
+
 function takePicture() {
     fetch("/capture")
     .then(response => {
@@ -15,9 +26,13 @@ function takePicture() {
     })
     .then(data => {
         console.log("Received: ", data);
-        let keys = Object.keys(data.message);
-        for (let i = 0; i < keys.length; i++) {
-            addItem(keys[i], data.message[keys[i]]);
+        if (!data.ok) {
+            addErrorMessage(data.message);
+        } else {
+            let keys = Object.keys(data.message);
+            for (let i = 0; i < keys.length; i++) {
+                addItem(keys[i], data.message[keys[i]]);
+            }
         }
     })
     .catch(error => {

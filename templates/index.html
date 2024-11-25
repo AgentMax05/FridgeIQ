@@ -21,11 +21,11 @@
             <div class="sensor-data">
                 <div class="sensor-card">
                     <h3>TEMPERATURE</h3>
-                    <div class="sensor-value">4°C</div>
+                    <div class="sensor-value temperature">4°C</div>
                 </div>
                 <div class="sensor-card">
                     <h3>HUMIDITY</h3>
-                    <div class="sensor-value">45%</div>
+                    <div class="sensor-value humidity">45%</div>
                 </div>
             </div>
             
@@ -35,10 +35,12 @@
                 <div class="detected-item">Milk Carton</div> -->
             </div>
         </div>
+        <div id="error-popup"></div>
     </div>
 
     <script src="{{ url_for('static', filename='js/photo_preview.js')}}"></script>
     <script src="{{ url_for('static', filename='js/items_handler.js')}}"></script>
     <script src="{{ url_for('static', filename='js/take_photo.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/dht11.js')}}"></script>
 </body>
 </html>
