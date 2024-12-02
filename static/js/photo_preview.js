@@ -1,61 +1,77 @@
-//photo_preview.js
+// photo_preview.js
 let previewCanvas = document.querySelector("canvas#previewCanvas");
-let captureCanvas = document.createElement('canvas'); // Separate canvas for capturing
+let captureCanvas = document.createElement('canvas');
 let previewContext = previewCanvas.getContext("2d");
 let captureContext = captureCanvas.getContext("2d");
 
 let video = document.querySelector("video#videoElement");
 
-let canvas = previewCanvas;
-
+// Request high resolution but don't force it
 if (navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({
         video: {
-            width: { ideal: 4096 }, // Request higher resolution
+            width: { ideal: 4096 },
             height: { ideal: 3072 },
-            facingMode: "environment", // Use back camera if available
-            aspectRatio: { ideal: 4/3 },
-            frameRate: { ideal: 30 },
-            resizeMode: "none" // Prevent automatic resizing
-        }, 
+            facingMode: "environment",
+            aspectRatio: { ideal: 4/3 }
+        },
         audio: false
     }).then((stream) => {
         video.srcObject = stream;
-
+        
+        // Log actual video dimensions for debugging
         video.addEventListener("loadedmetadata", () => {
-            // Set square dimensions
-            const size = 350;  // Square size
-            canvas.width = size;
-            canvas.height = size;
-            canvas.style.width = `${size}px`;
-            canvas.style.height = `${size}px`;
-
-            captureCanvas.height = video.videoHeight;
-            captureCanvas.width = video.videoWidth;
+            console.log("Video dimensions:", video.videoWidth, "x", video.videoHeight);
             
+            // Set preview canvas size
+            const previewSize = 350;
+            previewCanvas.width = previewSize;
+            previewCanvas.height = previewSize;
+            previewCanvas.style.width = `${previewSize}px`;
+            previewCanvas.style.height = `${previewSize}px`;
+
+            // Set capture canvas to video dimensions
+            captureCanvas.width = video.videoWidth;
+            captureCanvas.height = video.videoHeight;
 
             requestAnimationFrame(drawFrame);
-        })
+        });
     })
     .catch((error) => {
-        console.log(error);
-        console.log("Video preview not working!");
-    })
+        console.log("Video preview error:", error);
+        // Log constraints that weren't accepted
+        console.log("Failed constraints:", error.constraint);
+    });
 }
 
 function drawFrame() {
-    // Preview: square crop and scale down
-    const size = Math.min(video.videoWidth, video.videoHeight);
-    const startX = (video.videoWidth - size) / 2;
-    const startY = (video.videoHeight - size) / 2;
+    if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        // Preview: square crop and scale down
+        const size = Math.min(video.videoWidth, video.videoHeight);
+        const startX = (video.videoWidth - size) / 2;
+        const startY = (video.videoHeight - size) / 2;
 
-    previewContext.drawImage(video, 
-        startX, startY, size, size,
-        0, 0, previewCanvas.width, previewCanvas.height
-    );
+        previewContext.drawImage(video, 
+            startX, startY, size, size,
+            0, 0, previewCanvas.width, previewCanvas.height
+        );
 
-    // Full resolution capture canvas
-    captureContext.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+        // Full resolution capture canvas
+        captureContext.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+    }
     
     requestAnimationFrame(drawFrame);
+}
+
+// take_photo.js
+function takePicture() {
+    // Use maximum quality for PNG
+    const data = captureCanvas.toDataURL('image/png', 1.0);
+    
+    // Save the image
+    const a = document.createElement('a');
+    a.href = data;
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    a.download = `webcam_photo_${timestamp}.png`;
+    a.click();
 }
