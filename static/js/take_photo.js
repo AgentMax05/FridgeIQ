@@ -39,10 +39,10 @@ function takePicture() {
         console.error("Error: ", error);
     })
 
-    // const data = canvas.toDataURL("image/png");
-    // // console.log(data);
-    // let a = document.createElement("a");
-    // a.href = data;
-    // a.download = "webcam_photo.png";
-    // a.click();
+    const data = canvas.toDataURL("image/png");
+    console.log(data);
+    let a = document.createElement("a");
+    a.href = data;
+    a.download = "webcam_photo.png";
+    a.click();
 }
