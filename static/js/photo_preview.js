@@ -4,7 +4,18 @@ let canvas = document.querySelector("canvas#previewCanvas")
 let context = canvas.getContext("2d");
 
 if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({video: {width: 1920, height: 1080}, audio: false})
+    navigator.mediaDevices.getUserMedia({
+        video: {
+            width: { ideal: 4096 }, // Request higher resolution
+            height: { ideal: 3072 },
+            facingMode: "environment", // Use back camera if available
+            aspectRatio: { ideal: 4/3 },
+            frameRate: { ideal: 30 },
+            resizeMode: "none" // Prevent automatic resizing
+        }, 
+        audio: false
+    })
+
     .then((stream) => {
         video.srcObject = stream;
 
@@ -25,15 +36,18 @@ if (navigator.mediaDevices.getUserMedia) {
 }
 
 function drawFrame() {
-    // Calculate dimensions to crop the video to a square
+    // Preview: square crop and scale down
     const size = Math.min(video.videoWidth, video.videoHeight);
     const startX = (video.videoWidth - size) / 2;
     const startY = (video.videoHeight - size) / 2;
 
-    // Draw only the square center portion of the video
-    context.drawImage(video, 
-        startX, startY, size, size,  // Source (crop) coordinates
-        0, 0, canvas.width, canvas.height  // Destination coordinates
+    previewContext.drawImage(video, 
+        startX, startY, size, size,
+        0, 0, previewCanvas.width, previewCanvas.height
     );
+
+    // Full resolution capture canvas
+    captureContext.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+    
     requestAnimationFrame(drawFrame);
 }
