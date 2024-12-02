@@ -4,6 +4,10 @@ let captureCanvas = document.createElement('canvas'); // Separate canvas for cap
 let previewContext = previewCanvas.getContext("2d");
 let captureContext = captureCanvas.getContext("2d");
 
+let video = document.querySelector("video#videoElement");
+
+let canvas = previewCanvas;
+
 if (navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({
         video: {
@@ -15,9 +19,7 @@ if (navigator.mediaDevices.getUserMedia) {
             resizeMode: "none" // Prevent automatic resizing
         }, 
         audio: false
-    })
-
-    .then((stream) => {
+    }).then((stream) => {
         video.srcObject = stream;
 
         video.addEventListener("loadedmetadata", () => {
@@ -28,10 +30,15 @@ if (navigator.mediaDevices.getUserMedia) {
             canvas.style.width = `${size}px`;
             canvas.style.height = `${size}px`;
 
+            captureCanvas.height = video.videoHeight;
+            captureCanvas.width = video.videoWidth;
+            
+
             requestAnimationFrame(drawFrame);
         })
     })
     .catch((error) => {
+        console.log(error);
         console.log("Video preview not working!");
     })
 }

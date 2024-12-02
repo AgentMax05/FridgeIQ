@@ -2,7 +2,7 @@
 from flask import Flask, jsonify, render_template 
 import detect 
 
-from picamera2 import Picamera2
+# from picamera2 import Picamera2
 import adafruit_dht
 import board
 
@@ -16,22 +16,24 @@ def hello_world():
 
 @app.route("/capture", methods=["GET"])
 def capture_image():
-    picam2 = Picamera2()
-    camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, lores={"size": (640, 480)}, display="lores")
-    picam2.configure(camera_config)
-    picam2.set_controls({"AfMode": 2, "AfTrigger": 0})
+    # picam2 = Picamera2()
+    # camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, lores={"size": (640, 480)}, display="lores")
+    # picam2.configure(camera_config)
+    # picam2.set_controls({"AfMode": 2, "AfTrigger": 0})
 
-    try:
-        picam2.start()
-        picam2.capture_file("temp_image.jpg")
-        picam2.stop()
+    # try:
+    #     picam2.start()
+    #     picam2.capture_file("temp_image.jpg")
+    #     picam2.stop()
 
-        food_objects = detect.detect_foods("./temp_image.jpg")
+    #     food_objects = detect.detect_foods("./temp_image.jpg")
 
-        return jsonify({"ok": True, "message": food_objects}), 200
+    #     return jsonify({"ok": True, "message": food_objects}), 200
 
-    except Exception as e:
-        return jsonify({"ok": False, "message": str(e)}), 500
+    # except Exception as e:
+    #     return jsonify({"ok": False, "message": str(e)}), 500
+
+    return jsonify({"ok": False, "message": str(e)}), 500
 
 @app.route("/dht11", methods=["GET"])
 def get_dht11():
