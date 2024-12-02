@@ -39,8 +39,10 @@ def capture_image():
 def get_dht11():
     try:
         temperature_c = dht_device.temperature
-        temperature_f = temperature_c * (9 / 5) + 32
         humidity = dht_device.humidity
+        print(f"{temperature_c} C")
+        print(f"Humidity: {humidity}")
+        temperature_f = temperature_c * (9 / 5) + 32
 
         return jsonify({"ok": True, "message": {"temperature": temperature_f, "humidity": humidity}}), 200
     except Exception as e:
