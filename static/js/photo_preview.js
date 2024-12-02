@@ -1,7 +1,8 @@
 //photo_preview.js
-let video = document.querySelector("video#videoElement");
-let canvas = document.querySelector("canvas#previewCanvas")
-let context = canvas.getContext("2d");
+let previewCanvas = document.querySelector("canvas#previewCanvas");
+let captureCanvas = document.createElement('canvas'); // Separate canvas for capturing
+let previewContext = previewCanvas.getContext("2d");
+let captureContext = captureCanvas.getContext("2d");
 
 if (navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({
