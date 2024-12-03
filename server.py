@@ -99,7 +99,10 @@ def get_dht11():
 
         return jsonify({"ok": True, "message": {"temperature": temperature_f, "humidity": humidity}}), 200
     except Exception as e:
-        return jsonify({"ok": False, "message": str(e)}), 500
+        sleep(0.2)
+        print("retrying dht11")
+        return get_dht11()
+        # return jsonify({"ok": False, "message": str(e)}), 500
 
 # if __name__ == "__main__":
 #     app.run(debug=True)
