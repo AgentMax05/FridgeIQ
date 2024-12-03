@@ -32,7 +32,7 @@ preview_config = picam2.create_still_configuration(main={"size": (640, 480)}, bu
 picam2.configure(preview_config)
     # picam2.start()
 
-capture_config = picam2.create_still_configuration(main={"size": (4096, 3072)}, buffer_count = 1)  # Adjust resolution as needed
+capture_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, buffer_count = 1)  # Adjust resolution as needed
 # picam2.configure(capture_config)
     
 
