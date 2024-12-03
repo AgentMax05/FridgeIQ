@@ -28,7 +28,7 @@ picam2 = Picamera2()
 #     buffer_count=3
 # )
 
-preview_config = picam2.create_preview_configuration(main={"size": (640, 480)}, buffer_count = 1)
+preview_config = picam2.create_still_configuration(main={"size": (640, 480)}, buffer_count = 1)
 picam2.configure(preview_config)
     # picam2.start()
 
