@@ -74,19 +74,19 @@ def capture_image():
     # picam2.configure(camera_config)
     # picam2.set_controls({"AfMode": 2, "AfTrigger": 0})
 
-    # try:
+    try:
     #     picam2.start()
-    #     picam2.capture_file("temp_image.jpg")
+        picam2.capture_file("temp_image.jpg")
     #     picam2.stop()
 
-    #     food_objects = detect.detect_foods("./temp_image.jpg")
+        food_objects = detect.detect_foods("./temp_image.jpg")
 
-    #     return jsonify({"ok": True, "message": food_objects}), 200
+        return jsonify({"ok": True, "message": food_objects}), 200
 
-    # except Exception as e:
-    #     return jsonify({"ok": False, "message": str(e)}), 500
+    except Exception as e:
+        return jsonify({"ok": False, "message": str(e)}), 500
 
-    return jsonify({"ok": False, "message": str(e)}), 500
+    # return jsonify({"ok": False, "message": str(e)}), 500
 
 @app.route("/dht11", methods=["GET"])
 def get_dht11():
