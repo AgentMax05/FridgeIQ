@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FridgeIQ Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+
+    <!-- <link rel="stylesheet" href="../static/css/index.css"> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 <body>
     <div class="container">
@@ -17,7 +24,16 @@
                 <button id="captureButton"></button>
             </div>
         </div>
-        
+
+        <div class="itemPreview">
+            <p class="title">Adding Item</p>
+            <p class="itemName"></p>
+            <div>
+                <input type="date" class="datePicker" placeholder="Expiration Date">
+                <button class="addButton">Add</button>
+            </div>
+        </div>
+
         <div class="right-panel">
             <div class="sensor-data">
                 <div class="sensor-card">
@@ -38,6 +54,15 @@
         </div>
         <div id="error-popup"></div>
     </div>
+
+    <script>
+        flatpickr(".datePicker", {
+            theme: "dark",
+            position: "above"
+        });
+    </script>
+
+    <!-- <script src="../static/js/items_handler.js"></script> -->
 
     <script src="{{ url_for('static', filename='js/photo_preview.js')}}"></script>
     <script src="{{ url_for('static', filename='js/items_handler.js')}}"></script>

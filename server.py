@@ -2,6 +2,8 @@
 from flask import Flask, jsonify, render_template, send_file, Response, stream_with_context
 import detect 
 
+import json
+
 from threading import Thread
 
 from picamera2 import Picamera2
@@ -53,6 +55,11 @@ picam2.set_controls({"FrameRate": 80})
 picam2.start()
 
 frame = picam2.capture_array()
+
+STORAGE = {}
+
+with open("./storage.json", "r") as storageFile:
+    STORAGE = json.load(storageFile)
 
 def update_frame():
     global frame

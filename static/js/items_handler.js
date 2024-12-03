@@ -27,32 +27,59 @@ document.querySelector(".items-list").addEventListener("touchstart", (event) => 
 
 const itemsList = document.querySelector("div.items-list");
 
-let items = {};
+let items = [];
+
+let pName = document.querySelector(".itemPreview .itemName");
+let expirationDateInput = document.querySelector(".itemPreview .datePicker");
+
+document.querySelector(".itemPreview button").addEventListener("click", () => {
+    pushItem(pName.innerHTML, 1, expirationDateInput.value);
+    expirationDateInput.value = "";
+})
 
 function addItem(itemName, count) {
-    if (items.hasOwnProperty(itemName)) {
-        items[itemName] += count;
-        let existingItem = itemsList.querySelector(`[data-name="${itemName}"]`);
-        existingItem.setAttribute("data-count", items[itemName]);
-        existingItem.querySelector(".count").innerHTML = items[itemName];
+    pName.innerHTML = itemName;
+}
+
+function pushItem(itemName, count, expirationDate) {
+    let foundIndex = -1;
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].name == itemName && items[i].expiration == expirationDate) {
+            foundIndex = i;
+            items[i].count += count;
+            break;
+        }
+    }
+    if (foundIndex >= 0) {
+        let existingItem = itemsList.querySelector(`[data-name="${itemName}"][data-expiration="${expirationDate}"]`);
+        existingItem.setAttribute("data-count", items[foundIndex].count);
+        existingItem.querySelector(".count").innerHTML = items[foundIndex].count;
     } else {
-        items[itemName] = count;
+        items.push({name: itemName, count: count, expiration: expirationDate});
         let newItem = document.createElement("div");
         newItem.classList.add("detected-item");
         newItem.setAttribute("data-name", itemName);
         newItem.setAttribute("data-count", count);
+        newItem.setAttribute("data-expiration", expirationDate);
 
         let nameP = document.createElement("p");
         nameP.classList.add("name");
         nameP.innerHTML = itemName;
+
+        let expP = document.createElement("p");
+        expP.classList.add("expiration");
+        expP.innerHTML = expirationDate;
 
         let countP = document.createElement("p");
         countP.classList.add("count");
         countP.innerHTML = count;
 
         newItem.appendChild(nameP);
+        newItem.appendChild(expP);
         newItem.appendChild(countP);
 
         itemsList.appendChild(newItem);
     }
 }
+
+addItem("test", 1);

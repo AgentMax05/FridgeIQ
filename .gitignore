@@ -4,3 +4,5 @@ fruits
 images
 categorize.py
 bounding_boxes.py
+main.py
+./static/js/photo_preview.js
