@@ -100,10 +100,12 @@ def capture_image():
                     print(f"Food item found: {product_name}")
                     
                     if product_name in scanned_items.keys():
-                        if (time.time() - scanned_items[product_name]) > 0.5:
-                            scanned_items[product_name] = time.time()
-                            items.append(product_name)
-                            beep()
+                        if (time.time() - scanned_items[product_name]) <= 0.5:
+                            continue
+                    
+                    scanned_items[product_name] = time.time()
+                    items.append(product_name)
+                    beep()
     
         return jsonify({"ok": True, "message": items}), 200
 
