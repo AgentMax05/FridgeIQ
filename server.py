@@ -1,6 +1,6 @@
 #server.py
 from flask import Flask, jsonify, render_template, send_file, Response, stream_with_context
-# import detect 
+import detect 
 
 from threading import Thread
 
@@ -81,6 +81,12 @@ def hello_world():
 @app.route("/get-image-preview", methods=["GET"])
 def get_image():
     return Response(stream_with_context(generate_preview()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route("/vision", methods=["GET"])
+def detect_food():
+
+    food_objects = detect.detect_foods(frame)
+    return jsonify({"ok": True, "message": food_objects}), 200
 
 @app.route("/capture", methods=["GET"])
 def capture_image():

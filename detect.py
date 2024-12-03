@@ -6,13 +6,13 @@ import pathlib
 
 client = vision.ImageAnnotatorClient()
 
-def detect_foods(filename):
-    file_path = os.path.abspath(filename)
+def detect_foods(frame):
+    # file_path = os.path.abspath(filename)
 
-    with open (file_path, "rb") as imageFile:
-        contents = imageFile.read()
+    # with open (file_path, "rb") as imageFile:
+    #     contents = imageFile.read()
 
-    image = vision.Image(content=contents)
+    image = vision.Image(content=frame)
 
     response = client.object_localization(image=image)
     objects = response.localized_object_annotations
