@@ -22,13 +22,21 @@ app = Flask(__name__)
 
 picam2 = Picamera2()
 
-camera_config = picam2.create_still_configuration(
-    # main={"size": (640, 480)},
-    main={"size": (1920, 1080)},
-    buffer_count=3
-)
+# camera_config = picam2.create_still_configuration(
+#     # main={"size": (640, 480)},
+#     main={"size": (1920, 1080)},
+#     buffer_count=3
+# )
 
-picam2.configure(camera_config)
+preview_config = picam2.create_preview_configuration(main={"size": (640, 480)}, buffer_count = 1)
+picam2.configure(preview_config)
+    # picam2.start()
+
+capture_config = picam2.create_still_configuration(main={"size": (4096, 3072)}, buffer_count = 1)  # Adjust resolution as needed
+# picam2.configure(capture_config)
+    
+
+# picam2.configure(camera_config)
 
 picam2.set_controls({"AfMode": 2})  # 2 = Continuous autofocus (if supported)
 picam2.set_controls({"FrameRate": 30})
@@ -81,7 +89,9 @@ def capture_image():
 
     try:
     #     picam2.start()
+        picam2.configure(capture_config)
         picam2.capture_file("temp_image.jpg")
+        picam2.configure(preview_config)
     #     picam2.stop()
 
         img = Image.open("temp_image.jpg")
