@@ -97,7 +97,7 @@ def get_dht11():
         print(f"Humidity: {humidity}")
         temperature_f = temperature_c * (9 / 5) + 32
 
-        return jsonify({"ok": True, "message": {"temperature": temperature_f, "humidity": humidity}}), 200
+        return jsonify({"ok": True, "message": {"temperature": round(temperature_f, 2), "humidity": round(humidity, 2)}}), 200
     except Exception as e:
         sleep(0.2)
         print("retrying dht11")
