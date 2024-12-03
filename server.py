@@ -17,12 +17,13 @@ app = Flask(__name__)
 picam2 = Picamera2()
 
 camera_config = picam2.create_still_configuration(
-    main={"size": (1920, 1080)},
+    main={"size": (640, 480)},
     buffer_count=1
 )
 
 picam2.configure(camera_config)
 
+picam2.set_controls({"AfMode": 2})  # 2 = Continuous autofocus (if supported)
 picam2.set_controls({"FrameRate": 30})
 
 picam2.start()
