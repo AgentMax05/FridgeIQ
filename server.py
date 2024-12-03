@@ -1,6 +1,6 @@
 #server.py
 from flask import Flask, jsonify, render_template, send_file, Response, stream_with_context
-import detect 
+# import detect 
 
 from threading import Thread
 
