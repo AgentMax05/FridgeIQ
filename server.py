@@ -15,6 +15,20 @@ import requests
 
 from time import sleep
 
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+buzzer=23
+GPIO.setup(buzzer,GPIO.OUT)
+
+def beep_buzzer(length=0.2):
+    GPIO.output(buzzer, GPIO.HIGH)
+    sleep(length)
+    GPIO.output(buzzer, GPIO.LOW)
+
+def beep(length=0.2):
+    thread = Thread(target=beep_buzzer, args=[length])
+    thread.start()
+
 dht_device = adafruit_dht.DHT11(board.D4)
 
 app = Flask(__name__)
@@ -110,6 +124,7 @@ def capture_image():
                     product_name = product_data["product"].get("product_name", "Unknown Product")
                     print(f"Food item found: {product_name}")
                     items.append(product_name)
+                    beep()
 
         # print(items)
 
