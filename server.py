@@ -89,9 +89,10 @@ def capture_image():
 
     try:
     #     picam2.start()
-        picam2.configure(capture_config)
+        # picam2.configure(capture_config)
+        picam2.switch_mode(capture_config)
         picam2.capture_file("temp_image.jpg")
-        picam2.configure(preview_config)
+        picam2.switch_mode(preview_config)
     #     picam2.stop()
 
         img = Image.open("temp_image.jpg")
