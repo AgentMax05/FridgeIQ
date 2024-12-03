@@ -81,5 +81,3 @@ function pushItem(itemName, count, expirationDate) {
         itemsList.appendChild(newItem);
     }
 }
-
-addItem("test", 1);
