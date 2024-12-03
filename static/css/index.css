@@ -93,7 +93,7 @@ html {
     transform: scaleX(-1);
 } */
 
-image.previewImage {
+img.previewImage {
     height: 350px;
     width: 350px;
     border-radius: 15px;
