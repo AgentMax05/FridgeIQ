@@ -9,6 +9,10 @@ import adafruit_dht
 import board
 import io
 
+from PIL import Image
+from pyzbar import decode
+import requests
+
 from time import sleep
 
 dht_device = adafruit_dht.DHT11(board.D4)
@@ -79,9 +83,25 @@ def capture_image():
         picam2.capture_file("temp_image.jpg")
     #     picam2.stop()
 
-        food_objects = detect.detect_foods("./temp_image.jpg")
+        img = Image.open("temp_image.jpg")
+        barcodes = decode(img)
 
-        return jsonify({"ok": True, "message": food_objects}), 200
+        items = []
+        
+        for barcode in barcodes:
+            barcode_data = barcode.data.decode("utf-8")
+            api_url = f"https://world.openfoodfacts.org/api/v0/product/{barcode_data}.json"
+            response = requests.get(api_url)
+            if response.status_code == 200:
+                product_data = response.json()
+                items.append(product_data)
+
+        print(items)
+
+        # food_objects = detect.detect_foods("./temp_image.jpg")
+
+        # return jsonify({"ok": True, "message": food_objects}), 200
+        return jsonify({"ok": True, "message": []}), 200
 
     except Exception as e:
         return jsonify({"ok": False, "message": str(e)}), 500
