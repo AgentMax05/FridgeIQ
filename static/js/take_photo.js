@@ -29,10 +29,13 @@ function takePicture() {
         if (!data.ok) {
             addErrorMessage(data.message);
         } else {
-            let keys = Object.keys(data.message);
-            for (let i = 0; i < keys.length; i++) {
-                addItem(keys[i], data.message[keys[i]]);
+            for (let i = 0; i < data.message.length; i++) {
+                addItem(data.message[i], 1);
             }
+            // let keys = Object.keys(data.message);
+            // for (let i = 0; i < keys.length; i++) {
+            //     addItem(keys[i], data.message[keys[i]]);
+            // }
         }
     })
     .catch(error => {
