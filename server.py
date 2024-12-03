@@ -84,8 +84,9 @@ def get_image():
 
 @app.route("/vision", methods=["GET"])
 def detect_food():
+    picam2.capture_file("temp_image.jpg")
 
-    food_objects = detect.detect_foods(frame)
+    food_objects = detect.detect_foods("temp_image.jpg")
     return jsonify({"ok": True, "message": food_objects}), 200
 
 @app.route("/capture", methods=["GET"])
