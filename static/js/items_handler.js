@@ -56,28 +56,53 @@ function pushItem(itemName, count, expirationDate) {
         existingItem.querySelector(".count").innerHTML = items[foundIndex].count;
     } else {
         items.push({name: itemName, count: count, expiration: expirationDate});
+
+        function compareDates(a, b) {
+            if (a.expiration < b.expiration) {
+                return -1;
+            }
+            if (a.expiration > b.expiration) {
+                return 1;
+            }
+            return 0;
+        }
+        
+        items.sort(compareDates);
+
+        addAllItems();
+    }
+}
+
+function addAllItems() {
+    itemsList.innerHTML = "";
+    
+    for (let i = 0; i < items.length; i++) {
+        let itemName = items[i].name;
+        let count = items[i].count;
+        let expirationDate = items[i].expiration
+
         let newItem = document.createElement("div");
         newItem.classList.add("detected-item");
         newItem.setAttribute("data-name", itemName);
         newItem.setAttribute("data-count", count);
         newItem.setAttribute("data-expiration", expirationDate);
-
+    
         let nameP = document.createElement("p");
         nameP.classList.add("name");
         nameP.innerHTML = itemName;
-
+    
         let expP = document.createElement("p");
         expP.classList.add("expiration");
         expP.innerHTML = expirationDate;
-
+    
         let countP = document.createElement("p");
         countP.classList.add("count");
         countP.innerHTML = count;
-
+    
         newItem.appendChild(nameP);
         newItem.appendChild(expP);
         newItem.appendChild(countP);
-
+    
         itemsList.appendChild(newItem);
     }
 }
