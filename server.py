@@ -10,7 +10,7 @@ import board
 import io
 
 from PIL import Image
-from pyzbar import decode
+from pyzbar.pyzbar import decode
 import requests
 
 from time import sleep
