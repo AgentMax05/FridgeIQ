@@ -23,7 +23,8 @@ app = Flask(__name__)
 picam2 = Picamera2()
 
 camera_config = picam2.create_still_configuration(
-    main={"size": (640, 480)},
+    # main={"size": (640, 480)},
+    main={"size": (1920, 1080)},
     buffer_count=3
 )
 
