@@ -2,6 +2,8 @@
 from flask import Flask, jsonify, render_template, send_file, Response, stream_with_context
 import detect 
 
+from threading import Thread
+
 from picamera2 import Picamera2
 import adafruit_dht
 import board
@@ -29,10 +31,21 @@ picam2.set_controls({"FrameRate": 30})
 picam2.start()
 image_path = "./temp_capture.jpg"
 
+frame = picam2.capture_array()
+
+def update_frame():
+    global frame
+    while True:
+        frame = picam2.capture_array()
+        sleep(1.0 / 30)
+
+update_frame_thread = Thread(target=update_frame)
+update_frame_thread.start()
+
 def generate_preview():
     while True:
         # Capture the frame as a JPEG
-        frame = picam2.capture_array()
+        # frame = picam2.capture_array()
         img_io = io.BytesIO()
         from PIL import Image  # Importing here to ensure clean module usage
         Image.fromarray(frame).save(img_io, format="JPEG")

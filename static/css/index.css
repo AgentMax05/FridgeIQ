@@ -85,7 +85,15 @@ html {
     display: none;
 }
 
-canvas#previewCanvas {
+/* canvas#previewCanvas {
+    height: 350px;
+    width: 350px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    transform: scaleX(-1);
+} */
+
+image.previewImage {
     height: 350px;
     width: 350px;
     border-radius: 15px;

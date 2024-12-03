@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
 </head>
 <body>
-    <img src="/get-image-preview" alt="notworking" style="width:640px; height:auto">
     <div class="container">
         <div class="left-panel">
             <div class="photoPreview">
-                <video autoplay="true" id="videoElement"></video>
-                <canvas id="previewCanvas"></canvas>
+                <img class="previewImage" src="/get-image-preview" alt="Video Stream Error">
+                <!-- <video autoplay="true" id="videoElement"></video> -->
+                <!-- <canvas id="previewCanvas"></canvas> -->
                 <button id="captureButton"></button>
             </div>
         </div>
