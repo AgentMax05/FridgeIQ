@@ -10,10 +10,10 @@ let video = document.querySelector("video#videoElement");
 if (navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({
         video: {
-            width: { ideal: 4096 },
-            height: { ideal: 3072 },
+            width: { exact: 4096 },
+            height: { exact: 3072 },
             facingMode: "environment",
-            aspectRatio: { ideal: 4/3 }
+            aspectRatio: { exact: 4/3 }
         },
         audio: false
     }).then((stream) => {
@@ -63,15 +63,15 @@ function drawFrame() {
     requestAnimationFrame(drawFrame);
 }
 
-// take_photo.js
-function takePicture() {
-    // Use maximum quality for PNG
-    const data = captureCanvas.toDataURL('image/png', 1.0);
+// // take_photo.js
+// function takePicture() {
+//     // Use maximum quality for PNG
+//     const data = captureCanvas.toDataURL('image/png', 1.0);
     
-    // Save the image
-    const a = document.createElement('a');
-    a.href = data;
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    a.download = `webcam_photo_${timestamp}.png`;
-    a.click();
-}
+//     // Save the image
+//     const a = document.createElement('a');
+//     a.href = data;
+//     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+//     a.download = `webcam_photo_${timestamp}.png`;
+//     a.click();
+// }
