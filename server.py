@@ -100,7 +100,7 @@ def capture_image():
                     print(f"Food item found: {product_name}")
                     
                     if product_name in scanned_items.keys():
-                        if (time.time() - scanned_items[product_name]) <= 0.5:
+                        if (time.time() - scanned_items[product_name]) <= 1.0:
                             continue
                     
                     scanned_items[product_name] = time.time()
