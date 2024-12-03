@@ -39,7 +39,7 @@ capture_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, 
 # picam2.configure(camera_config)
 
 picam2.set_controls({"AfMode": 2})  # 2 = Continuous autofocus (if supported)
-picam2.set_controls({"FrameRate": 60})
+picam2.set_controls({"FrameRate": 80})
 
 picam2.start()
 image_path = "./temp_capture.jpg"
@@ -90,13 +90,13 @@ def capture_image():
     try:
     #     picam2.start()
         # picam2.configure(capture_config)
-        picam2.switch_mode(capture_config)
-        picam2.capture_file("temp_image.jpg")
-        picam2.switch_mode(preview_config)
+        # picam2.switch_mode(capture_config)
+        # picam2.capture_file("temp_image.jpg")
+        # picam2.switch_mode(preview_config)
     #     picam2.stop()
 
-        img = Image.open("temp_image.jpg")
-        barcodes = decode(img)
+        # img = Image.open("temp_image.jpg")
+        barcodes = decode(frame)
 
         items = []
         
