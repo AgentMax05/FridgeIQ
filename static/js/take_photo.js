@@ -41,7 +41,11 @@ function takePicture() {
     .catch(error => {
         console.error("Error: ", error);
     })
+
+    setTimeout(() => {takePicture()}, 100);
 }
+
+takePicture();
 
 // let imageCapture;
 
