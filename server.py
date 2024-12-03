@@ -94,7 +94,10 @@ def capture_image():
             response = requests.get(api_url)
             if response.status_code == 200:
                 product_data = response.json()
-                items.append(product_data)
+                if product_data.get("status") == 1:  # Product found
+                    product_name = product_data["product"].get("product_name", "Unknown Product")
+                    print(f"Food item found: {product_name}")
+                    items.append(product_name)
 
         print(items)
 
