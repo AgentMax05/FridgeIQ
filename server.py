@@ -1,5 +1,5 @@
 #server.py
-from flask import Flask, jsonify, render_template, send_file, Response
+from flask import Flask, jsonify, render_template, send_file, Response, stream_with_context
 import detect 
 
 from picamera2 import Picamera2
@@ -18,7 +18,7 @@ picam2 = Picamera2()
 
 camera_config = picam2.create_still_configuration(
     main={"size": (640, 480)},
-    buffer_count=1
+    buffer_count=3
 )
 
 picam2.configure(camera_config)
@@ -50,7 +50,7 @@ def hello_world():
 def get_image():
     # picam2.capture_file(image_path)
     # send_file(image_path, mimetype="image/jpeg")
-    return Response(generate_preview(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(stream_with_context(generate_preview(), mimetype='multipart/x-mixed-replace; boundary=frame'))
 
 
 
