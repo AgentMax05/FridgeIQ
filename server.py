@@ -50,7 +50,7 @@ def hello_world():
 def get_image():
     # picam2.capture_file(image_path)
     # send_file(image_path, mimetype="image/jpeg")
-    return Response(stream_with_context(generate_preview(), mimetype='multipart/x-mixed-replace; boundary=frame'))
+    return Response(stream_with_context(generate_preview()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 
