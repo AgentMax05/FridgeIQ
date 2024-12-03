@@ -111,12 +111,14 @@ def capture_image():
                     print(f"Food item found: {product_name}")
                     items.append(product_name)
 
-        print(items)
+        # print(items)
 
         # food_objects = detect.detect_foods("./temp_image.jpg")
 
-        # return jsonify({"ok": True, "message": food_objects}), 200
-        return jsonify({"ok": True, "message": []}), 200
+        food_objects = items
+
+        return jsonify({"ok": True, "message": food_objects}), 200
+        # return jsonify({"ok": True, "message": []}), 200
 
     except Exception as e:
         return jsonify({"ok": False, "message": str(e)}), 500
