@@ -55,10 +55,25 @@
         <div id="error-popup"></div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
     <script>
         flatpickr(".datePicker", {
             theme: "dark",
-            position: "above"
+            position: "above",
+            onReady: function(selectedDates, dateStr, instance) {
+                const calendar = instance.calendarContainer;
+                if (calendar) {
+                    // Initialize Hammer.js on the calendar container
+                    const hammer = new Hammer(calendar);
+
+                    // Swipe left: Go to the next month
+                    hammer.on("swipeleft", () => instance.changeMonth(1));
+
+                    // Swipe right: Go to the previous month
+                    hammer.on("swiperight", () => instance.changeMonth(-1));
+                }
+            }
         });
     </script>
 
