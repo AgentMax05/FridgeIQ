@@ -23,6 +23,10 @@ GPIO.setmode(GPIO.BCM)
 buzzer=23
 GPIO.setup(buzzer,GPIO.OUT)
 
+import logging 
+log = logging.getLogger('werkzeug')
+log.disabled = True
+
 def beep_buzzer(length=0.2):
     GPIO.output(buzzer, GPIO.HIGH)
     sleep(length)
