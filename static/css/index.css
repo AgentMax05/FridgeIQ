@@ -1,4 +1,9 @@
 /* static/css/index.css */
+* {
+    user-select: none;
+    cursor: none;
+}
+
 body {
     height: 600px;
     width: 1024px;
