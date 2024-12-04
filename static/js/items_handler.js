@@ -13,7 +13,9 @@ function removeItem(event) {
 
 let lastTap = 0;
 
-document.querySelector('.items-list').addEventListener('dblclick', removeItem);
+// document.querySelector('.items-list').addEventListener('dblclick', removeItem);
+document.querySelector('.items-list').addEventListener('click', removeItem);
+
 document.querySelector(".items-list").addEventListener("touchstart", (event) => {
     const currentTime = new Date().getTime();
     const tapGap = currentTime - lastTap;
