@@ -58,6 +58,13 @@ function pushItem(itemName, count, expirationDate) {
         items.push({name: itemName, count: count, expiration: expirationDate});
 
         function compareDates(a, b) {
+            if (a.expiration == "" && b.expiration != "") {
+                return 1;
+            }
+            if (b.expiration == "" && a.expiration != "") {
+                return -1;
+            }
+
             if (a.expiration < b.expiration) {
                 return -1;
             }
