@@ -101,7 +101,7 @@ img.previewImage {
     width: 350px;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.05);
-    transform: scaleX(-1);
+    transform: scaleX(-1) rotate(180deg);
     object-fit: cover;
 }
 
