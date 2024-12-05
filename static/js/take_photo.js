@@ -23,7 +23,7 @@ function takePictureVision() {
     // let keys = Object.keys(data.message);
     // for (let i = 0; i < keys.length; i++) {
     setTimeout(() => {
-        let objects = ["apple", "banana", "pear"];
+        let objects = ["Apple", "Banana", "Pear"];
         addItem(objects[num], 1);
         num++;
     }, 1500);
