@@ -19,11 +19,16 @@ def detect_foods(filename):
 
     food_objects = {}
 
+    print("Objects:")
+
     for obj in objects:
+        print(obj.name)
         if categorize.is_food_item(obj.name):
             if obj.name in food_objects.keys():
                 food_objects[obj.name] += 1
             else:
                 food_objects[obj.name] = 1
-    
+
+    print()
+
     return food_objects

@@ -1,5 +1,5 @@
-let humidityText = document.querySelector(".sensor-value .humidity");
-let temperatureText = document.querySelector(".sensor-value .temperature");
+let humidityText = document.querySelector(".sensor-value.humidity");
+let temperatureText = document.querySelector(".sensor-value.temperature");
 
 function getDHT11() {
     fetch("/dht11")
